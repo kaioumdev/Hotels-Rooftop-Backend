@@ -17,7 +17,19 @@ router.post("/create-post", async (req, res) => {
 
 //get all blogs
 router.get("/", async (req, res) => {
-    const post = await Blog.find();
+    const { search } = req.query;
+    let query = {};
+
+    if (search) {
+        query = {
+            ...query,
+            $or: [
+                { title: { $regex: search, $options: 'i' } },
+                { content: { $regex: search, $options: 'i' } }
+            ]
+        };
+    }
+    const post = await Blog.find(query);
     res.send({ message: "Got all blog posts", posts: post })
 })
 
