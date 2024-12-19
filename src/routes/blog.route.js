@@ -17,7 +17,8 @@ router.post("/create-post", async (req, res) => {
 
 //get all blogs
 router.get("/", async (req, res) => {
-    res.send("Blog Routes running...");
+    const post = await Blog.find();
+    res.send({ message: "Got all blog posts", posts: post })
 })
 
 module.exports = router;
