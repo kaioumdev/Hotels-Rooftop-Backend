@@ -17,28 +17,33 @@ router.post("/create-post", async (req, res) => {
 
 //get all blogs
 router.get("/", async (req, res) => {
-    const { search, category, location } = req.query;
-    let query = {};
+    try {
+        const { search, category, location } = req.query;
+        let query = {};
 
-    if (search) {
-        query = {
-            ...query,
-            $or: [
-                { title: { $regex: search, $options: 'i' } },
-                { content: { $regex: search, $options: 'i' } }
-            ]
-        };
-    }
+        if (search) {
+            query = {
+                ...query,
+                $or: [
+                    { title: { $regex: search, $options: 'i' } },
+                    { content: { $regex: search, $options: 'i' } }
+                ]
+            };
+        }
 
-    if (category) {
-        query = { ...query, category: category };
-    }
+        if (category) {
+            query = { ...query, category: category };
+        }
 
-    if (location) {
-        query = { ...query, location: location };
+        if (location) {
+            query = { ...query, location: location };
+        }
+        const post = await Blog.find(query).sort({ createdAt: -1 });
+        res.send({ message: "Got all blog posts", posts: post })
+    } catch (error) {
+        console.error("Error getting all post", error);
+        res.status(500).send("Error getting all post");
     }
-    const post = await Blog.find(query).sort({ createdAt: -1 });
-    res.send({ message: "Got all blog posts", posts: post })
 })
 
 module.exports = router;
