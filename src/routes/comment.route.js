@@ -13,6 +13,17 @@ router.post("/post-comment", async (req, res) => {
         console.error("an error occurred while creating new comment", error);
         res.status(500).send({ message: "Failed to create comment" })
     }
+});
+
+//get all comments counts
+router.get("/total-comments", async (req, res) => {
+    try {
+        const totalComments = await Comment.countDocuments({});
+        res.status(200).send({ message: "Total comments count successfully", totalComments });
+    } catch (error) {
+        console.error("Failed to get comments counts", error)
+        res.status(500).send({ message: "Failed to get comments counts" })
+    }
 })
 
 
