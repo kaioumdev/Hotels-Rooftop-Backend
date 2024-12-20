@@ -44,9 +44,7 @@ router.get("/", async (req, res) => {
         console.error("Error getting all post", error);
         res.status(500).send("Error getting all post");
     }
-})
-
-module.exports = router;
+});
 
 //get single blog post by id
 router.get("/:id", async (req, res) => {
@@ -62,5 +60,24 @@ router.get("/:id", async (req, res) => {
         res.status(500).send("Error facing single post");
     }
 })
+
+
+//update blog post by id
+router.patch("/update-post/:id", async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const updatedPost = await Blog.findByIdAndUpdate(postId, { ...req.body }, { new: true });
+        if (!updatedPost) {
+            return res.status(404).send({ message: "Post not found" });
+        }
+        res.send({ message: "Updated post successfully", post: updatedPost })
+    } catch (error) {
+        console.error("Error updating post", error);
+        res.status(500).send("Error updating post");
+    }
+})
+
+module.exports = router;
+
 
 
