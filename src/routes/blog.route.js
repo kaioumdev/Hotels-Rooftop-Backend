@@ -110,7 +110,7 @@ router.get("/related/:id", async (req, res) => {
             title: titleRegex
         };
         const relatedPost = await Blog.find(relatedQuery);
-        res.send({ message: "Fetched related posts", posts: relatedPost });
+        res.status(200).send({ message: "Fetched related posts", posts: relatedPost });
     } catch (error) {
         console.error("Error fetching related post", error);
         res.status(500).send("Error fetching related post");
