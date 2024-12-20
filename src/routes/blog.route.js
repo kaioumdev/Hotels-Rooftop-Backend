@@ -91,6 +91,30 @@ router.delete("/:id", async (req, res) => {
         console.error("Error delete post", error);
         res.status(500).send("Error delete post");
     }
+});
+
+//related posts
+router.get("/related/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!id) {
+            return res.status(400).send({ message: "Please provide post id" });
+        };
+        const post = await Blog.findById(id);
+        if (!post) {
+            return res.status(404).send({ message: "Post not found" });
+        };
+        const titleRegex = new RegExp(post.title.split(' ').join('|'), 'i');
+        const relatedQuery = {
+            _id: { $ne: id },
+            title: titleRegex
+        };
+        const relatedPost = await Blog.find(relatedQuery);
+        res.send({ message: "Fetched related posts", posts: relatedPost });
+    } catch (error) {
+        console.error("Error fetching related post", error);
+        res.status(500).send("Error fetching related post");
+    }
 })
 
 module.exports = router;
