@@ -48,4 +48,19 @@ router.get("/", async (req, res) => {
 
 module.exports = router;
 
+//get single blog post by id
+router.get("/:id", async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const post = await Blog.findById(postId);
+        if (!post) {
+            return res.status(404).send({ message: "Post not found" });
+        }
+        res.send({ message: "Got single blog post", post: post })
+    } catch (error) {
+        console.error("Error facing single post", error);
+        res.status(500).send("Error facing single post");
+    }
+})
+
 
