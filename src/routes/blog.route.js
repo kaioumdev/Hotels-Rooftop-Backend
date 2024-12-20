@@ -1,5 +1,6 @@
 const express = require('express');
 const Blog = require('../model/blog.model');
+const Comment = require('../model/comment.model');
 const router = express.Router();
 
 //create blog post
@@ -53,7 +54,9 @@ router.get("/:id", async (req, res) => {
         const post = await Blog.findById(postId);
         if (!post) {
             return res.status(404).send({ message: "Post not found" });
-        }
+        };
+        //comment related to the post
+        const comment = await Comment.find({ postId: postId }).populate('user', 'username email');
         res.send({ message: "Got single blog post", post: post })
     } catch (error) {
         console.error("Error facing single post", error);
@@ -86,6 +89,8 @@ router.delete("/:id", async (req, res) => {
         if (!post) {
             return res.status(404).send({ message: "Post not found" });
         };
+        //delete related comments
+        await Comment.deleteMany({ postId: postId })
         res.send({ message: "Deleted post successfully", post: post })
     } catch (error) {
         console.error("Error delete post", error);
