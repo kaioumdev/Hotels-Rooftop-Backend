@@ -75,6 +75,22 @@ router.patch("/update-post/:id", async (req, res) => {
         console.error("Error updating post", error);
         res.status(500).send("Error updating post");
     }
+});
+
+
+//delete blog post by id
+router.delete("/:id", async (req, res) => {
+    try {
+        const post = req.params.id;
+        const deletedPost = await Blog.findByIdAndDelete(post);
+        if (!deletedPost) {
+            return res.status(404).send({ message: "Post not found" });
+        };
+        res.send({ message: "Deleted post successfully", post: deletedPost })
+    } catch (error) {
+        console.error("Error delete post", error);
+        res.status(500).send("Error delete post");
+    }
 })
 
 module.exports = router;
