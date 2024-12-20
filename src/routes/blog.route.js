@@ -81,12 +81,12 @@ router.patch("/update-post/:id", async (req, res) => {
 //delete blog post by id
 router.delete("/:id", async (req, res) => {
     try {
-        const post = req.params.id;
-        const deletedPost = await Blog.findByIdAndDelete(post);
-        if (!deletedPost) {
+        const postId = req.params.id;
+        const post = await Blog.findByIdAndDelete(postId);
+        if (!post) {
             return res.status(404).send({ message: "Post not found" });
         };
-        res.send({ message: "Deleted post successfully", post: deletedPost })
+        res.send({ message: "Deleted post successfully", post: post })
     } catch (error) {
         console.error("Error delete post", error);
         res.status(500).send("Error delete post");
