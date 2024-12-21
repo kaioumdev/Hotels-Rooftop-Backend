@@ -13,6 +13,18 @@ router.post("/register", async (req, res) => {
         console.error("Failed to register user", error);
         res.status(500).send("Registration failed");
     }
+});
+
+//login a user
+router.post("/login", async (req, res) => {
+    try {
+        console.log(req.body);
+        const { email, password } = req.body;
+
+    } catch (error) {
+        console.error("Failed to login user", error);
+        res.status(500).send("login failed");
+    }
 })
 
 
