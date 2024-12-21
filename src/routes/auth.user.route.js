@@ -22,9 +22,20 @@ router.post("/login", async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findOne({ email: email });
         if (!user) {
-            return res.status(404).send("User not found");
+            return res.status(404).send({ message: "User not found" });
         };
         const isMatch = await user.comparePassword(password);
+        if (!isMatch) {
+            return res.status(400).send({ message: "Invalid password" });
+        };
+        res.status(200).send({
+            message: "User Login successfully", user: {
+                _id: user._id,
+                email: user.email,
+                username: user.username,
+                role: user.role
+            }
+        })
 
     } catch (error) {
         console.error("Failed to login user", error);
