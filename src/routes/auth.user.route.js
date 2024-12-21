@@ -18,8 +18,13 @@ router.post("/register", async (req, res) => {
 //login a user
 router.post("/login", async (req, res) => {
     try {
-        console.log(req.body);
+        // console.log(req.body);
         const { email, password } = req.body;
+        const user = await User.findOne({ email: email });
+        if (!user) {
+            return res.status(404).send("User not found");
+        };
+        const isMatch = await user.comparePassword(password);
 
     } catch (error) {
         console.error("Failed to login user", error);

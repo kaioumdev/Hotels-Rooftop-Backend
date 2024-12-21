@@ -33,7 +33,12 @@ userSchema.pre('save', async function (next) {
     const hashedPassword = await bcrypt.hash(user.password, 10);
     user.password = hashedPassword;
     next();
-})
+});
+
+//compare password when user tries to login
+userSchema.methods.comparePassword = async function (givenPasseord) {
+    return await bcrypt.compare(givenPasseord, this.password);
+}
 
 const User = model('User', userSchema);
 module.exports = User;
