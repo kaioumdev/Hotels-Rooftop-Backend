@@ -28,6 +28,8 @@ router.post("/login", async (req, res) => {
         if (!isMatch) {
             return res.status(400).send({ message: "Invalid password" });
         };
+        //generate token here
+        const token = await generateToken(user._id);
         res.status(200).send({
             message: "User Login successfully", user: {
                 _id: user._id,

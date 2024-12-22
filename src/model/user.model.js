@@ -36,8 +36,8 @@ userSchema.pre('save', async function (next) {
 });
 
 //compare password when user tries to login
-userSchema.methods.comparePassword = async function (givenPasseord) {
-    return await bcrypt.compare(givenPasseord, this.password);
+userSchema.methods.comparePassword = function (givenPasseord) {
+    return bcrypt.compare(givenPasseord, this.password);
 }
 
 const User = model('User', userSchema);
