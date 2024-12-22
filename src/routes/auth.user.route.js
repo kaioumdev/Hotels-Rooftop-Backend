@@ -37,7 +37,7 @@ router.post("/login", async (req, res) => {
             sameSite: true
         })
         res.status(200).send({
-            message: "User Login successfully", user: {
+            message: "User Login successfully", token, user: {
                 _id: user._id,
                 email: user.email,
                 username: user.username,
