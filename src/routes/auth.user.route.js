@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../model/user.model');
+const generateToken = require('../middleware/generateToken');
 const router = express.Router();
 
 //register a new user
@@ -30,6 +31,7 @@ router.post("/login", async (req, res) => {
         };
         //generate token here
         const token = await generateToken(user._id);
+        console.log(token);
         res.status(200).send({
             message: "User Login successfully", user: {
                 _id: user._id,
