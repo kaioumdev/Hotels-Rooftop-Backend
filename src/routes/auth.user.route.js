@@ -88,7 +88,7 @@ router.delete("/users/:id", async (req, res) => {
     }
 });
 
-//update a user role
+//update a role of user 
 router.put("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
