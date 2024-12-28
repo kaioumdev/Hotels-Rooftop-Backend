@@ -73,7 +73,7 @@ router.get("/users", async (req, res) => {
     }
 });
 
-//delete a user
+//delete user
 router.delete("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
