@@ -5,7 +5,7 @@ const verifyToken = require('../middleware/verifyToken');
 const isAdmin = require('../middleware/isAdmin');
 const router = express.Router();
 
-//create blog post
+//create a new blog post
 router.post("/create-post", verifyToken, isAdmin, async (req, res) => {
     try {
         const newPost = new Blog({ ...req.body, author: req.userId });
