@@ -1,6 +1,7 @@
 const express = require('express');
 const Blog = require('../model/blog.model');
 const Comment = require('../model/comment.model');
+const verifyToken = require('../middleware/verifyToken');
 const router = express.Router();
 
 //create blog post
@@ -48,7 +49,7 @@ router.get("/", async (req, res) => {
 });
 
 //get single blog post by id
-router.get("/:id", async (req, res) => {
+router.get("/:id", verifyToken, async (req, res) => {
     try {
         const postId = req.params.id;
         const post = await Blog.findById(postId);
