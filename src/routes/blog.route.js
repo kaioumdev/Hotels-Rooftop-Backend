@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
         if (location) {
             query = { ...query, location: location };
         }
-        const post = await Blog.find(query).sort({ createdAt: -1 });
+        const post = await Blog.find(query).populate('author', 'email').sort({ createdAt: -1 });
         res.send({ message: "Got all blog posts", posts: post })
     } catch (error) {
         console.error("Error getting all post", error);
