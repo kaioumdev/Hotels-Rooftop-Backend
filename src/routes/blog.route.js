@@ -5,7 +5,7 @@ const verifyToken = require('../middleware/verifyToken');
 const router = express.Router();
 
 //create blog post
-router.post("/create-post", async (req, res) => {
+router.post("/create-post", verifyToken, async (req, res) => {
     try {
         const newPost = new Blog({ ...req.body });
         await newPost.save();
@@ -49,7 +49,7 @@ router.get("/", async (req, res) => {
 });
 
 //get single blog post by id
-router.get("/:id", verifyToken, async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
         const postId = req.params.id;
         const post = await Blog.findById(postId);
@@ -67,7 +67,7 @@ router.get("/:id", verifyToken, async (req, res) => {
 
 
 //update blog post by id
-router.patch("/update-post/:id", async (req, res) => {
+router.patch("/update-post/:id", verifyToken, async (req, res) => {
     try {
         const postId = req.params.id;
         const updatedPost = await Blog.findByIdAndUpdate(postId, { ...req.body }, { new: true });
@@ -83,7 +83,7 @@ router.patch("/update-post/:id", async (req, res) => {
 
 
 //delete blog post by id
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", verifyToken, async (req, res) => {
     try {
         const postId = req.params.id;
         const post = await Blog.findByIdAndDelete(postId);
@@ -100,7 +100,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 //related posts
-router.get("/related/:id", async (req, res) => {
+router.get("/related/:id", verifyToken, async (req, res) => {
     try {
         const { id } = req.params;
         if (!id) {
