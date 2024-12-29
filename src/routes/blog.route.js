@@ -6,7 +6,7 @@ const router = express.Router();
 //create blog post
 router.post("/create-post", async (req, res) => {
     try {
-        const newPost = new Blog({ ...req.body });
+        const newPost = new Blog({ ...req.body, author: req.userId });
         await newPost.save();
         res.status(201).send({ message: "New post created successfully", post: newPost })
     } catch (error) {
