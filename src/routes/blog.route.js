@@ -100,7 +100,7 @@ router.delete("/:id", verifyToken, async (req, res) => {
 });
 
 //related posts
-router.get("/related/:id", verifyToken, async (req, res) => {
+router.get("/related/:id", async (req, res) => {
     try {
         const { id } = req.params;
         if (!id) {
