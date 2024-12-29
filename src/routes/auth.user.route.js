@@ -62,7 +62,7 @@ router.post("/logout", async (req, res) => {
     }
 });
 
-//get all users
+//get all register users
 router.get("/users", async (req, res) => {
     try {
         const users = await User.find({}, 'id email role');
