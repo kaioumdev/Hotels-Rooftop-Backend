@@ -7,7 +7,10 @@ const port = process.env.port || 5000;
 
 //parse options
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
 
 //routes
 const blogRoutes = require("./src/routes/blog.route");
