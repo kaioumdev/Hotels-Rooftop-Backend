@@ -9,7 +9,6 @@ const BlogSchema = new mongoose.Schema({
     content: {
         type: Object,
         required: true
-
     },
     coverImg: String,
     category: String,
