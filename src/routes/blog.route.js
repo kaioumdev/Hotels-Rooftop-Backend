@@ -58,8 +58,8 @@ router.get("/:id", async (req, res) => {
             return res.status(404).send({ message: "Post not found" });
         };
         //comment related to the post
-        const comment = await Comment.find({ postId: postId }).populate('user', 'username email');
-        res.send({ message: "Got single blog post", post: post })
+        const comments = await Comment.find({ postId: postId }).populate('user', 'username email');
+        res.send({ post, comments })
     } catch (error) {
         console.error("Error facing single post", error);
         res.status(500).send("Error facing single post");
