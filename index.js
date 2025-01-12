@@ -1,12 +1,17 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 const port = process.env.port || 5000;
 
 //parse options
 app.use(express.json());
+app.use(cookieParser());
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cors({
     origin: 'http://localhost:5173',
     credentials: true
