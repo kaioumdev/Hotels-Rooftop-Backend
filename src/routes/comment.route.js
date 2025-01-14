@@ -5,7 +5,6 @@ const router = express.Router();
 //create a comment
 router.post("/post-comment", async (req, res) => {
     try {
-        console.log(req.body);
         const newComment = new Comment(req.body);
         await newComment.save();
         res.status(200).send({ message: "Comment created successfully", comment: newComment })
