@@ -1,6 +1,4 @@
 const express = require('express');
-const User = require('../model/user.model');
-const generateToken = require('../middleware/generateToken');
 const { registerUser, loginUser, logoutUser, getAllUsers, deleteUser, updateUserRole } = require('../controllers/user.controller');
 const router = express.Router();
 
