@@ -9,6 +9,37 @@ const createPost = async (req, res) => {
     }
 };
 
+const getAllPosts = async (req, res) => {
+    try {
+        const { search, category, location } = req.query;
+        let query = {};
+
+        if (search) {
+            query = {
+                ...query,
+                $or: [
+                    { title: { $regex: search, $options: 'i' } },
+                    { content: { $regex: search, $options: 'i' } }
+                ]
+            };
+        }
+
+        if (category) {
+            query = { ...query, category: category };
+        }
+
+        if (location) {
+            query = { ...query, location: location };
+        }
+        const posts = await Blog.find(query).populate('author', 'email').sort({ createdAt: -1 });
+        res.send(posts);
+    } catch (error) {
+        console.error("Error getting all post", error);
+        res.status(500).send("Error getting all post");
+    }
+}
+
 module.exports = {
-    createPost
+    createPost,
+    getAllPosts
 }

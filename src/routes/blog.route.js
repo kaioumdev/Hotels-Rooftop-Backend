@@ -3,7 +3,7 @@ const Blog = require('../model/blog.model');
 const Comment = require('../model/comment.model');
 const verifyToken = require('../middleware/verifyToken');
 const isAdmin = require('../middleware/isAdmin');
-const { createPost } = require('../controllers/blog.controller');
+const { createPost, getAllPosts } = require('../controllers/blog.controller');
 const router = express.Router();
 
 //create a new blog post
@@ -11,35 +11,7 @@ router.post("/create-post", verifyToken, isAdmin, createPost)
 
 
 //get all blogs
-router.get("/", async (req, res) => {
-    try {
-        const { search, category, location } = req.query;
-        let query = {};
-
-        if (search) {
-            query = {
-                ...query,
-                $or: [
-                    { title: { $regex: search, $options: 'i' } },
-                    { content: { $regex: search, $options: 'i' } }
-                ]
-            };
-        }
-
-        if (category) {
-            query = { ...query, category: category };
-        }
-
-        if (location) {
-            query = { ...query, location: location };
-        }
-        const posts = await Blog.find(query).populate('author', 'email').sort({ createdAt: -1 });
-        res.send(posts);
-    } catch (error) {
-        console.error("Error getting all post", error);
-        res.status(500).send("Error getting all post");
-    }
-});
+router.get("/", getAllPosts);
 
 //get single blog post by id
 router.get("/:id", async (req, res) => {
