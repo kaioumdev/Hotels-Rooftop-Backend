@@ -1,6 +1,4 @@
 const express = require('express');
-const Blog = require('../model/blog.model');
-const Comment = require('../model/comment.model');
 const verifyToken = require('../middleware/verifyToken');
 const isAdmin = require('../middleware/isAdmin');
 const { createPost, getAllPosts, getSinglePost, updatePost, deletePost, getRelatedPosts } = require('../controllers/blog.controller');
