@@ -1,3 +1,6 @@
+const generateToken = require("../middleware/generateToken");
+const User = require("../model/user.model");
+
 const registerUser = async (req, res) => {
     try {
         const { email, password, username } = req.body;
