@@ -3,7 +3,7 @@ const Blog = require('../model/blog.model');
 const Comment = require('../model/comment.model');
 const verifyToken = require('../middleware/verifyToken');
 const isAdmin = require('../middleware/isAdmin');
-const { createPost, getAllPosts, getSinglePost, updatePost } = require('../controllers/blog.controller');
+const { createPost, getAllPosts, getSinglePost, updatePost, deletePost } = require('../controllers/blog.controller');
 const router = express.Router();
 
 //create a new blog post
@@ -22,21 +22,7 @@ router.patch("/update-post/:id", verifyToken, updatePost);
 
 
 //delete blog post by id
-router.delete("/:id", verifyToken, async (req, res) => {
-    try {
-        const postId = req.params.id;
-        const post = await Blog.findByIdAndDelete(postId);
-        if (!post) {
-            return res.status(404).send({ message: "Post not found" });
-        };
-        //delete related comments
-        await Comment.deleteMany({ postId: postId })
-        res.send({ message: "Deleted post successfully", post: post })
-    } catch (error) {
-        console.error("Error delete post", error);
-        res.status(500).send("Error delete post");
-    }
-});
+router.delete("/:id", verifyToken, deletePost);
 
 //related posts
 router.get("/related/:id", async (req, res) => {
