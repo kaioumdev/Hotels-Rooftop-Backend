@@ -3,19 +3,11 @@ const Blog = require('../model/blog.model');
 const Comment = require('../model/comment.model');
 const verifyToken = require('../middleware/verifyToken');
 const isAdmin = require('../middleware/isAdmin');
+const { createPost } = require('../controllers/blog.controller');
 const router = express.Router();
 
 //create a new blog post
-router.post("/create-post", verifyToken, isAdmin, async (req, res) => {
-    try {
-        const newPost = new Blog({ ...req.body, author: req.userId });
-        await newPost.save();
-        res.status(201).send({ message: "New post created successfully", post: newPost })
-    } catch (error) {
-        console.error("Error creating post", error);
-        res.status(500).send("Server Error");
-    }
-})
+router.post("/create-post", verifyToken, isAdmin, createPost)
 
 
 //get all blogs
