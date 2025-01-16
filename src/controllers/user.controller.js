@@ -62,6 +62,20 @@ const getAllUsers = async (req, res) => {
         console.error("Failed to get users", error);
         res.status(500).send("Failed to get users");
     }
+};
+
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findOneAndDelete(id);
+        if (!user) {
+            return res.status(404).send({ message: "User not found" });
+        };
+        res.status(200).send({ message: "User deleted successfully" });
+    } catch (error) {
+        console.error("Failed to delete user", error);
+        res.status(500).send("Failed to delete user");
+    }
 }
 
-module.exports = { registerUser, loginUser, logoutUser, getAllUsers };
+module.exports = { registerUser, loginUser, logoutUser, getAllUsers, deleteUser };

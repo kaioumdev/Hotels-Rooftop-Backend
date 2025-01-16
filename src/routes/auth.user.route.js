@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require('../model/user.model');
 const generateToken = require('../middleware/generateToken');
-const { registerUser, loginUser, logoutUser, getAllUsers } = require('../controllers/user.controller');
+const { registerUser, loginUser, logoutUser, getAllUsers, deleteUser } = require('../controllers/user.controller');
 const router = express.Router();
 
 //register a new user
@@ -17,19 +17,7 @@ router.post("/logout", logoutUser);
 router.get("/users", getAllUsers);
 
 //delete user
-router.delete("/users/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        const user = await User.findOneAndDelete(id);
-        if (!user) {
-            return res.status(404).send({ message: "User not found" });
-        };
-        res.status(200).send({ message: "User deleted successfully" });
-    } catch (error) {
-        console.error("Failed to delete user", error);
-        res.status(500).send("Failed to delete user");
-    }
-});
+router.delete("/users/:id", deleteUser);
 
 //update a role of user 
 router.put("/users/:id", async (req, res) => {
