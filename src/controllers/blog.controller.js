@@ -1,3 +1,6 @@
+const Blog = require("../model/blog.model");
+const Comment = require("../model/comment.model");
+
 const createPost = async (req, res) => {
     try {
         const newPost = new Blog({ ...req.body, author: req.userId });
