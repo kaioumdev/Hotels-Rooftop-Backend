@@ -52,6 +52,16 @@ const logoutUser = async (req, res) => {
         console.error("Failed to log out user", error);
         res.status(500).send("logout failed");
     }
+};
+
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find({}, 'id email role');
+        res.status(200).send({ message: "Users found successfully", users })
+    } catch (error) {
+        console.error("Failed to get users", error);
+        res.status(500).send("Failed to get users");
+    }
 }
 
-module.exports = { registerUser, loginUser, logoutUser };
+module.exports = { registerUser, loginUser, logoutUser, getAllUsers };

@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require('../model/user.model');
 const generateToken = require('../middleware/generateToken');
-const { registerUser, loginUser, logoutUser } = require('../controllers/user.controller');
+const { registerUser, loginUser, logoutUser, getAllUsers } = require('../controllers/user.controller');
 const router = express.Router();
 
 //register a new user
@@ -14,15 +14,7 @@ router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 
 //get all register users
-router.get("/users", async (req, res) => {
-    try {
-        const users = await User.find({}, 'id email role');
-        res.status(200).send({ message: "Users found successfully", users })
-    } catch (error) {
-        console.error("Failed to get users", error);
-        res.status(500).send("Failed to get users");
-    }
-});
+router.get("/users", getAllUsers);
 
 //delete user
 router.delete("/users/:id", async (req, res) => {
