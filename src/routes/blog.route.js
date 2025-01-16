@@ -3,7 +3,7 @@ const Blog = require('../model/blog.model');
 const Comment = require('../model/comment.model');
 const verifyToken = require('../middleware/verifyToken');
 const isAdmin = require('../middleware/isAdmin');
-const { createPost, getAllPosts } = require('../controllers/blog.controller');
+const { createPost, getAllPosts, getSinglePost } = require('../controllers/blog.controller');
 const router = express.Router();
 
 //create a new blog post
@@ -14,21 +14,7 @@ router.post("/create-post", verifyToken, isAdmin, createPost)
 router.get("/", getAllPosts);
 
 //get single blog post by id
-router.get("/:id", async (req, res) => {
-    try {
-        const postId = req.params.id;
-        const post = await Blog.findById(postId);
-        if (!post) {
-            return res.status(404).send({ message: "Post not found" });
-        };
-        //comment related to the post
-        const comments = await Comment.find({ postId: postId }).populate('user', 'username email');
-        res.send({ post, comments })
-    } catch (error) {
-        console.error("Error facing single post", error);
-        res.status(500).send("Error facing single post");
-    }
-})
+router.get("/:id", getSinglePost)
 
 
 //update blog post by id

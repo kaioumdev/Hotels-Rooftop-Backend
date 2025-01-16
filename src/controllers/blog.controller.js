@@ -37,9 +37,27 @@ const getAllPosts = async (req, res) => {
         console.error("Error getting all post", error);
         res.status(500).send("Error getting all post");
     }
-}
+};
+
+const getSinglePost = async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const post = await Blog.findById(postId);
+        if (!post) {
+            return res.status(404).send({ message: "Post not found" });
+        };
+        //comment related to the post
+        const comments = await Comment.find({ postId: postId }).populate('user', 'username email');
+        res.send({ post, comments })
+    } catch (error) {
+        console.error("Error facing single post", error);
+        res.status(500).send("Error facing single post");
+    }
+};
+
 
 module.exports = {
     createPost,
-    getAllPosts
+    getAllPosts,
+    getSinglePost
 }
