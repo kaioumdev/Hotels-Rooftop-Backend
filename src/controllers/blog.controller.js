@@ -55,9 +55,25 @@ const getSinglePost = async (req, res) => {
     }
 };
 
+const updatePost = async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const updatedPost = await Blog.findByIdAndUpdate(postId, { ...req.body }, { new: true });
+        if (!updatedPost) {
+            return res.status(404).send({ message: "Post not found" });
+        }
+        res.send({ message: "Updated post successfully", post: updatedPost })
+    } catch (error) {
+        console.error("Error updating post", error);
+        res.status(500).send("Error updating post");
+    }
+};
+
+
 
 module.exports = {
     createPost,
     getAllPosts,
-    getSinglePost
+    getSinglePost,
+    updatePost
 }

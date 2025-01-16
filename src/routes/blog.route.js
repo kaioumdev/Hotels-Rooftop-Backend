@@ -3,7 +3,7 @@ const Blog = require('../model/blog.model');
 const Comment = require('../model/comment.model');
 const verifyToken = require('../middleware/verifyToken');
 const isAdmin = require('../middleware/isAdmin');
-const { createPost, getAllPosts, getSinglePost } = require('../controllers/blog.controller');
+const { createPost, getAllPosts, getSinglePost, updatePost } = require('../controllers/blog.controller');
 const router = express.Router();
 
 //create a new blog post
@@ -18,19 +18,7 @@ router.get("/:id", getSinglePost)
 
 
 //update blog post by id
-router.patch("/update-post/:id", verifyToken, async (req, res) => {
-    try {
-        const postId = req.params.id;
-        const updatedPost = await Blog.findByIdAndUpdate(postId, { ...req.body }, { new: true });
-        if (!updatedPost) {
-            return res.status(404).send({ message: "Post not found" });
-        }
-        res.send({ message: "Updated post successfully", post: updatedPost })
-    } catch (error) {
-        console.error("Error updating post", error);
-        res.status(500).send("Error updating post");
-    }
-});
+router.patch("/update-post/:id", verifyToken, updatePost);
 
 
 //delete blog post by id
