@@ -42,6 +42,16 @@ const loginUser = async (req, res) => {
         console.error("Failed to login user", error);
         res.status(500).send("login failed");
     }
+};
+
+const logoutUser = async (req, res) => {
+    try {
+        res.clearCookie("token");
+        res.status(200).send({ message: "User logged out successfully" });
+    } catch (error) {
+        console.error("Failed to log out user", error);
+        res.status(500).send("logout failed");
+    }
 }
 
-module.exports = { registerUser, loginUser };
+module.exports = { registerUser, loginUser, logoutUser };

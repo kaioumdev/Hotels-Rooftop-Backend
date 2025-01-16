@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require('../model/user.model');
 const generateToken = require('../middleware/generateToken');
-const { registerUser, loginUser } = require('../controllers/user.controller');
+const { registerUser, loginUser, logoutUser } = require('../controllers/user.controller');
 const router = express.Router();
 
 //register a new user
@@ -11,15 +11,7 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 //logout a user
-router.post("/logout", async (req, res) => {
-    try {
-        res.clearCookie("token");
-        res.status(200).send({ message: "User logged out successfully" });
-    } catch (error) {
-        console.error("Failed to log out user", error);
-        res.status(500).send("logout failed");
-    }
-});
+router.post("/logout", logoutUser);
 
 //get all register users
 router.get("/users", async (req, res) => {
