@@ -9,17 +9,14 @@ const router = express.Router();
 //create a new blog post
 router.post("/create-post", verifyToken, isAdmin, createPost)
 
-
 //get all blogs
 router.get("/", getAllPosts);
 
 //get single blog post by id
 router.get("/:id", getSinglePost)
 
-
 //update blog post by id
 router.patch("/update-post/:id", verifyToken, updatePost);
-
 
 //delete blog post by id
 router.delete("/:id", verifyToken, deletePost);
