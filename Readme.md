@@ -61,7 +61,7 @@ Key directories and files:
     npm start  # Or yarn start
     ```
 
-    This will start the server, typically on `http://localhost:5000`.
+    This will start the server, typically on `https://hotels-rooftop-backend-eight.vercel.app`.
 
 ## API Endpoints
 
