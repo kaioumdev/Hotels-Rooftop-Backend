@@ -18,7 +18,7 @@ app.use(cors({
     origin: 'https://hotels-rooftop-frontend.vercel.app', // Frontend URL
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    // allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 
