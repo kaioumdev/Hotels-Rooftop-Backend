@@ -61,7 +61,7 @@ Key directories and files:
     npm start  # Or yarn start
     ```
 
-    This will start the server, typically on `https://hotels-rooftop-backend-eight.vercel.app`.
+    This will start the server, typically on `https://hotels-rooftop-backend-ivory.vercel.app`.
 
 ## API Endpoints
 
@@ -126,4 +126,4 @@ Contributions are welcome! Please follow these guidelines:
 
 To deploy this backend server live, you can use platforms like Vercel, Heroku, AWS, Google Cloud, or Digital Ocean.
 
-**Vercel Live Link:** [Live](https://hotels-rooftop-backend-eight.vercel.app/).
+**Vercel Live Link:** [Live](https://hotels-rooftop-backend-ivory.vercel.app/).
