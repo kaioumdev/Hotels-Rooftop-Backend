@@ -15,9 +15,12 @@ app.use(cookieParser());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(cors({
-    origin: 'https://hotels-rooftop-frontend.vercel.app', // Change to your frontend URL
-    credentials: true
+    origin: 'https://hotels-rooftop-frontend.vercel.app', // Frontend URL
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    // allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
 
 // Routes
 const blogRoutes = require("./src/routes/blog.route");
