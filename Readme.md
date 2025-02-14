@@ -31,8 +31,8 @@ Key directories and files:
 1.  **Clone the repository:**
 
     ```bash
-    git clone <repository_url>
-    cd backend  # Or the name of your backend directory
+    git clone https://github.com/kaiyumdev/Hotels-Rooftop-Backend
+    cd Hotels-Rooftop-Backend  # Or the name of your backend directory
     ```
 
 2.  **Install dependencies:**
@@ -126,4 +126,4 @@ Contributions are welcome! Please follow these guidelines:
 
 To deploy this backend server live, you can use platforms like Vercel, Heroku, AWS, Google Cloud, or Digital Ocean.
 
-1.  **Vercel Live Link:** [Live](https://hotels-rooftop-backend-eight.vercel.app/).
+**Vercel Live Link:** [Live](https://hotels-rooftop-backend-eight.vercel.app/).
