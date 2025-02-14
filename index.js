@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const port = 5005 || process.env.PORT
 
 require('dotenv').config();
 
@@ -30,6 +31,10 @@ app.use("/api/comments", commentRoutes);
 app.get('/', (req, res) => {
     res.send('Hotels Rooftop Backend is running 🚀');
 });
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})
 
 // MongoDB Connection
 async function connectDB() {
