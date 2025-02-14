@@ -121,3 +121,9 @@ Contributions are welcome! Please follow these guidelines:
 3.  Commit your changes with descriptive messages.
 4.  Push your branch to your fork.
 5.  Submit a pull request.
+
+## Deploying Live
+
+To deploy this backend server live, you can use platforms like Vercel, Heroku, AWS, Google Cloud, or Digital Ocean.
+
+1.  **Vercel Live Link:** [Live](https://hotels-rooftop-backend-eight.vercel.app/).
