@@ -174,19 +174,39 @@ const getAllUsers = async (req, res) => {
     }
 };
 
+// const deleteUser = async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const user = await User.findByIdAndDelete(id);
+//         if (!user) {
+//             return res.status(404).send({ message: "User not found" });
+//         }
+//         res.status(200).send({ message: "User deleted successfully" });
+//     } catch (error) {
+//         console.error("Failed to delete user", error);
+//         res.status(500).send({ message: "Failed to delete user" });
+//     }
+
 const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
+        console.log("Received ID:", id); // Debugging
+        if (!id) {
+            return res.status(400).send({ message: "User ID is required" });
+        }
+
         const user = await User.findByIdAndDelete(id);
         if (!user) {
             return res.status(404).send({ message: "User not found" });
         }
+
         res.status(200).send({ message: "User deleted successfully" });
     } catch (error) {
-        console.error("Failed to delete user", error);
+        console.error("Failed to delete user:", error);
         res.status(500).send({ message: "Failed to delete user" });
     }
 };
+
 
 const updateUserRole = async (req, res) => {
     try {
