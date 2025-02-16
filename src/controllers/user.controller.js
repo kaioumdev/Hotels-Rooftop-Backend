@@ -29,7 +29,7 @@ const loginUser = async (req, res) => {
         res.cookie("token", token, {
             httpOnly: true, //enable this only when you have https:
             secure: true,
-            sameSite: true
+            sameSite: "None",
         })
         res.status(200).send({
             message: "User Login successfully", token, user: {
