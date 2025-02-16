@@ -17,8 +17,6 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(cors({
     origin: 'http://localhost:5173', // Frontend URL
     credentials: true,
-    // methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    // allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 
