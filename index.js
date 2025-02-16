@@ -10,14 +10,17 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(cors({
     origin: 'https://hotels-rooftop-frontend.vercel.app',
-    methods: ["POST", "GET", "DELETE"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 
