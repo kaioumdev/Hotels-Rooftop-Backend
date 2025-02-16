@@ -169,7 +169,7 @@ app.get('/', (req, res) => {
 // ✅ MongoDB Connection
 async function connectDB() {
     try {
-        await mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect(process.env.MONGODB_URL);
         console.log('✅ Connected to MongoDB');
     } catch (error) {
         console.error('❌ MongoDB Connection Error:', error);
