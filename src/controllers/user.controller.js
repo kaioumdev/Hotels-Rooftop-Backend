@@ -137,6 +137,7 @@ const loginUser = async (req, res) => {
 
         res.status(200).send({
             message: "User logged in successfully",
+            token,
             user: {
                 _id: user._id,
                 email: user.email,
