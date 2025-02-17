@@ -124,6 +124,6 @@ Contributions are welcome! Please follow these guidelines:
 
 ## Deploying Live
 
-To deploy this backend server live, you can use platforms like Vercel, Heroku, AWS, Google Cloud, or Digital Ocean.
+To deploy your backend server live, you can use platforms like Vercel, Heroku, AWS, Google Cloud, or Digital Ocean.
 
 **Vercel Live Link:** [Live](https://hotels-rooftop-backend-ivory.vercel.app/).
